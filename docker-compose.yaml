@@ -14,7 +14,7 @@ services:
       - ./.env
 
   web:
-    build: . # ivan27n/yamdb_final:v1
+    build: ivan27n/yamdb_final:v1
     restart: always
     ports:
       - "8000:8000"
