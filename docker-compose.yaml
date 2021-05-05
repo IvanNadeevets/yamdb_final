@@ -12,6 +12,7 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
+
   web:
     build: . # ivan27n/yamdb_final:v1
     restart: always
@@ -19,25 +20,20 @@ services:
       - "8000:8000"
     volumes:
       - static_value:/code/static/
-
       - media_value:/code/media/
     depends_on:
       - db
     env_file:
       - ./.env
+
   nginx:
     image: nginx:1.19.3
-
     ports:
       - "80:80"
-
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-
       - static_value:/var/html/static/
-
       - media_value:/var/html/media/
-
     depends_on:
       - web
 
