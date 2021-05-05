@@ -1,6 +1,6 @@
 name: yamdb_workflow
 
-on: [push]
+on: [ push ]
 
 jobs:
   tests:
@@ -47,7 +47,19 @@ jobs:
     needs: build_and_push_to_docker_hub
     if: github.ref == 'refs/heads/master'
     steps:
-      - name: executing remote ssh commands to deploy
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Copying files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          rm: true
+          source: 'docker-compose.yaml, nginx/default.conf'
+          target: 'configs'
+      - name: Installing docker
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -55,11 +67,39 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker pull ivan27n/yamdb_final:latest
-            sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run --rm -d -p 8000:8000 ivan27n/yamdb_final:latest
-
-
+            sudo apt install docker.io docker-compose -y
+            sudo systemctl start docker
+            sudo systemctl enable docker
+            sudo apt-get update -y
+      - name: Create env file
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          rm: true
+          script: |
+            cd configs/
+            echo 'DB_NAME=${{ secrets.DB_NAME }}
+            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            SECRET_KEY=${{ secrets.SECRET_KEY }}
+            DB_PORT=${{ secrets.DB_PORT }}' > .env
+      - name: Executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            cd configs/
+            sudo docker-compose down -v
+            sudo docker system prune --force
+            sudo docker-compose pull
+            sudo docker-compose up -d
 
   send_message:
     runs-on: ubuntu-latest
