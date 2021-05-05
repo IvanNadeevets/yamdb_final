@@ -59,7 +59,7 @@ jobs:
           rm: true
           source: 'docker-compose.yaml, nginx/default.conf'
           target: 'configs'
-      - name: Installing docker.
+      - name: Installing docker
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -67,7 +67,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo apt install docker-ce docker-compose -y
+            sudo apt install docker.io docker-compose -y
             sudo systemctl start docker
             sudo systemctl enable docker
             sudo apt-get update -y
@@ -96,8 +96,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd configs/
-            sudo docker-compose down
-            sudo docker image prune
+            sudo docker-compose down -v
+            sudo docker system prune --force
             sudo docker-compose pull
             sudo docker-compose up -d
 
