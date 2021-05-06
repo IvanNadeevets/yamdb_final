@@ -14,13 +14,16 @@ docker-compose up -d --build && \
 docker-compose exec web python manage.py migrate --no-input && \
 docker-compose exec web python manage.py collectstatic --no-input
 `
+
 ## Заведение супер пользователя
 * Далее нужно завести супер-пользователя 
+
 `docker-compose exec web bash -c \
 DJANGO_SUPERUSER_USERNAME=<your_username> \
 DJANGO_SUPERUSER_PASSWORD=<your_password \
 DJANGO_SUPERUSER_EMAIL=<your_email> \
 python manage.py createsuperuser --noinput`
+
 * Супер-пользователь может создавать контент для базы данных через панель админа: `<адрес виртуального сервера>/admin`
 
 ## Запуск автотестов
