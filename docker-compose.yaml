@@ -16,6 +16,8 @@ services:
   web:
     image: ivan27n/yamdb_final
     restart: always
+    ports:
+      - "8000:8000"
     volumes:
       - static_value:/code/static/
       - media_value:/code/media/
@@ -30,8 +32,8 @@ services:
       - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - static_value:/var/html/static/
-      - media_value:/var/html/media/
+      - static-container:/code/static
+      - static-container:/code/media
     depends_on:
       - web
 
