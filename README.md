@@ -1,6 +1,6 @@
 ![example workflow](https://github.com/IvanNadeevets/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 # yamdb_final
-* yamdb_final Final Project 19 of the Sprint in which I set up the CI/CD using Github action.
+* yamdb_final is final Project 19 of the Sprint in which I set up the CI/CD using Github action.
 
 # ip adress of project 84.252.142.143:8000
 
