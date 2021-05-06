@@ -1,8 +1,7 @@
 ![example workflow](https://github.com/IvanNadeevets/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 # yamdb_final
-* yamdb_final is final Project 19 of the Sprint in which I set up the CI/CD using Github action.
-
-# ip adress of project 84.252.142.143:8000
+* yamdb_final - это финальный проект 19 спринта курсов яндекс практикум, в котором я настроил CI/CD с помощью Github workflow.
+* ip-адрес проекта 84.252.142.143:8000
 
 ## Запуск проекта
 * запускаем контейнера с приложением, БД postgresql, nginx 
@@ -29,9 +28,9 @@ python manage.py createsuperuser --noinput`
 ## Запуск автотестов
 * В корневой папке проекта запустите `pytest`
 
-### What I used
+### Стек технологий используемый в проекте
 * [Python: 3.8.5](https://www.python.org/)
-* [Django: 3.0.8](https://www.djangoproject.com/)
+* [Django: 3.0.5](https://www.djangoproject.com/)
 * [PostgreSQL: 12.4](https://www.postgresql.org/)
 * [Docker: 3.1.0](https://www.docker.com/)
 * [nginx:1.19.6](https://nginx.org/)
