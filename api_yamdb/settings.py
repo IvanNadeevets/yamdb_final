@@ -9,7 +9,12 @@ DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['84.252.142.143', 'localhost', ]
+    ALLOWED_HOSTS = [
+        '84.252.142.143',
+        'localhost',
+        'web',
+        '127.0.0.1',
+    ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
