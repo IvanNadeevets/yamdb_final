@@ -1,7 +1,7 @@
 ![example workflow](https://github.com/IvanNadeevets/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 # yamdb_final
 * yamdb_final - это финальный проект 19 спринта курсов яндекс практикум, в котором я настроил CI/CD с помощью Github workflow.
-* ip-адрес проекта 84.252.142.143:8000
+* ip-адрес проекта 84.252.142.143
 
 
 ## Функциональность - Проект имитирует api для работы с социальной сетью
