@@ -37,3 +37,6 @@ python manage.py createsuperuser --noinput`
 
 ### Лицензия
 [MIT](https://choosealicense.com/licenses/mit/)
+
+### Об авторе
+* студент 10 когорты факультета Backend-разработка Яндекс Практикума
