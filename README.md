@@ -1,6 +1,6 @@
 ![example workflow](https://github.com/IvanNadeevets/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 # yamdb_final
-* yamdb_final - это финальный проект 19 спринта курсов яндекс практикум, в котором я настроил CI/CD с помощью Github workflow.
+* yamdb_final - это финальный проект 19 спринта курсов яндекс практикум, в котором я настроил CI/CD с помощью docker-compose Github workflow.
 * ip-адрес проекта 84.252.142.143
 
 
@@ -23,15 +23,15 @@
 
 `
 docker-compose up -d --build && \
-docker-compose exec web python manage.py makemigrations --no-input && \
-docker-compose exec web python manage.py migrate --no-input && \
-docker-compose exec web python manage.py collectstatic --no-input
+docker exec <web> python manage.py makemigrations --no-input && \
+docker exec <web> python manage.py migrate --no-input && \
+docker exec <web> python manage.py collectstatic --no-input
 `
 
 ## Заведение супер пользователя
 * Далее нужно завести супер-пользователя 
 
-`docker-compose exec web bash -c \
+`docker exec -it <web> bash -c \
 DJANGO_SUPERUSER_USERNAME=<your_username> \
 DJANGO_SUPERUSER_PASSWORD=<your_password \
 DJANGO_SUPERUSER_EMAIL=<your_email> \
@@ -44,17 +44,17 @@ python manage.py createsuperuser --noinput`
 * Авторзация работает через e-mail в 3 шага:
 1. сначала делаете `POST` запрос на `/api/v1/auth/mail/` с полем `email`:
 ```
-curl --location --request POST 'http://127.0.0.1:8000/api/v1/auth/mail/' \
+curl --location --request POST '<адрес сервера>/api/v1/auth/mail/' \
 --form 'email=example@email.com'
 ```
 2. Оно создает в папке sent_emails файл, который будет содержать код активации 
 3. Делаете `POST` запрос на `/api/v1/auth/token/` с полями `email` и `confirmation_code` и в ответ получаете токен
 ```
-curl --location --request POST 'http://127.0.0.1:8000/api/v1/auth/token/' \
+curl --location --request POST '<адрес сервера>/api/v1/auth/token/' \
 --form 'email=example@email.com' \
 --form 'confirmation_code=5l5-1095457590921979885c'
 ```
-* email и прочую релеватную информацию в отсуствие доступа до api можно посмотреть в админке: 'http://127.0.0.1:8000/admin'
+* email и прочую релеватную информацию в отсуствие доступа до api можно посмотреть в админке: '<адрес сервера>/admin'
 
 ## Запуск автотестов
 * В корневой папке проекта запустите `pytest`
