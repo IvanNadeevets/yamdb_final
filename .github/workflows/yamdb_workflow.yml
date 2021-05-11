@@ -85,7 +85,8 @@ jobs:
             POSTGRES_USER=${{ secrets.POSTGRES_USER }}
             POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
             DB_HOST=${{ secrets.DB_HOST }}
-            DB_PORT=${{ secrets.DB_PORT }}' > .env
+            DB_PORT=${{ secrets.DB_PORT }}
+            SECRET_KEY_YAMDB=${{ secrets.SECRET_KEY_YAMDB }}' > .env
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
