@@ -1,6 +1,6 @@
 ![example workflow](https://github.com/IvanNadeevets/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 # yamdb_final
-* yamdb_final - это финальный проект 19 спринта курсов яндекс практикум, в котором я настроил CI/CD с помощью docker-compose Github workflow.
+* yamdb_final - это финальный проект 19 спринта курса "Python-разработчик Яндекс Практикум, в котором я настроил CI/CD с помощью docker-compose Github workflow.
 * ip-адрес проекта 84.252.142.143
 
 
@@ -13,7 +13,7 @@
 * Система администрирования и модерирования публикаций;
 * Система поиска произведений по различным полям;
 
-### Документация 
+## Документация 
 * Документацию для api можно найти по адресу: `<адрес виртуального сервера>\redoc`
 
 ## Запуск проекта
