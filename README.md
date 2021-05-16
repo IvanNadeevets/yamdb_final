@@ -21,12 +21,12 @@
 * запускаем миграции 
 * собираем статитку 
 
-`
+```shell
 docker-compose up -d --build && \
 docker exec <web> python manage.py makemigrations --no-input && \
 docker exec <web> python manage.py migrate --no-input && \
 docker exec <web> python manage.py collectstatic --no-input
-`
+```
 
 ## Заведение супер пользователя
 * Далее нужно завести супер-пользователя 
@@ -45,13 +45,13 @@ python manage.py createsuperuser --noinput
 * В проекте используется [Signature JWT](https://jwt.io/introduction/)
 * Авторзация работает через e-mail в 3 шага:
 1. сначала делаете `POST` запрос на `/api/v1/auth/mail/` с полем `email`:
-```
+```shell
 curl --location --request POST '<адрес сервера>/api/v1/auth/mail/' \
 --form 'email=example@email.com'
 ```
 2. Оно создает в папке sent_emails файл, который будет содержать код активации 
 3. Делаете `POST` запрос на `/api/v1/auth/token/` с полями `email` и `confirmation_code` и в ответ получаете токен
-```
+```shell
 curl --location --request POST '<адрес сервера>/api/v1/auth/token/' \
 --form 'email=example@email.com' \
 --form 'confirmation_code=5l5-1095457590921979885c'
