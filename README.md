@@ -31,11 +31,13 @@ docker exec <web> python manage.py collectstatic --no-input
 ## Заведение супер пользователя
 * Далее нужно завести супер-пользователя 
 
-`docker exec -it <web> bash -c \
+```shell
+docker exec -it <web> bash -c \
 DJANGO_SUPERUSER_USERNAME=<your_username> \
 DJANGO_SUPERUSER_PASSWORD=<your_password \
 DJANGO_SUPERUSER_EMAIL=<your_email> \
-python manage.py createsuperuser --noinput`
+python manage.py createsuperuser --noinput
+```
 
 * Супер-пользователь может создавать контент для базы данных через панель админа: `<адрес виртуального сервера>/admin`
 
